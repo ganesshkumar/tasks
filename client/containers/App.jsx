@@ -6,6 +6,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Tasks } from '../../imports/api/tasks.js';
 
+import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import Task from '../components/Task.jsx';
 import AccountsUIWrapper from '../components/AccountsUIWrapper.jsx';
@@ -17,8 +18,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      hideCompleted: false,
+      hideCompleted: false
     };
+
+    this.toggleHideCompleted = this.toggleHideCompleted.bind(this);
   }
 
   componentWillMount() {
@@ -70,33 +73,32 @@ class App extends Component {
         <header>
           <h1>Todo List ({this.props.incompleteCount})</h1>
 
-          <label className="hide-completed">
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-            Hide Completed Tasks
-          </label>
+          <div className="hide-completed">
+            <label className="pt-control pt-switch">
+              <input type="checkbox"
+                checked={this.state.hideCompleted}
+                onChange={this.toggleHideCompleted}/>
+              <span className="pt-control-indicator"></span>
+              Hide Completed
+            </label>
+          </div>
 
           <AccountsUIWrapper />
 
           { this.props.currentUser ?
             <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Type to add new tasks"
-              />
+              <input type="text"
+                  ref="textInput"
+                  className="text"
+                placeholder="Type to add new tasks"/>
             </form> : ''
           }
 
         </header>
 
-        <ul>
+        <div>
           {this.renderTasks()}
-        </ul>
+        </div>
       </div>
     );
   }
