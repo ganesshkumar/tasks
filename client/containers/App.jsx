@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Tasks } from '../api/tasks.js';
+import { Tasks } from '../../imports/api/tasks.js';
 
-import Task from './Task.jsx';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import SubscribeComponent from '../helpers/SubscriberComponent';
+import Task from '../components/Task.jsx';
+import AccountsUIWrapper from '../components/AccountsUIWrapper.jsx';
 
 
 // App component - represents the whole app
@@ -17,6 +19,10 @@ class App extends Component {
     this.state = {
       hideCompleted: false,
     };
+  }
+
+  componentWillMount() {
+    this.props.subscribe('tasks');
   }
 
   handleSubmit(event) {
@@ -97,17 +103,25 @@ class App extends Component {
 }
 
 App.propTypes = {
+  subscribe: PropTypes.func.isRequired,
   tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
 };
 
-export default createContainer(() => {
-  Meteor.subscribe('tasks');
-
+const mapStateToProps = state => {
   return {
-    tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-    incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-    currentUser: Meteor.user(),
+    tasks: state.todos,
+    incompleteCount: state.todos.filter(todo => !todo.checked).length,
+    currentUser: Meteor.user()
   };
-}, App);
+}
+
+const mapDispatchToProps = state => {
+  return {
+
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)
+    (SubscribeComponent(App));

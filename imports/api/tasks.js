@@ -12,7 +12,7 @@ if (Meteor.isServer) {
       $or: [
         { private: { $ne: true } },
         { owner: this.userId }
-      ],
+      ]
     });
   });
 }
