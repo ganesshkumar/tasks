@@ -11,7 +11,7 @@ if (Meteor.isServer) {
     return Tasks.find({
       $or: [
         { private: { $ne: true } },
-        { owner: this.userId },
+        { owner: this.userId }
       ],
     });
   });
@@ -30,7 +30,7 @@ Meteor.methods({
       text,
       createdAt: new Date(),
       owner: this.userId,
-      username: Meteor.users.findOne(this.userId).username,
+      username: Meteor.users.findOne(this.userId).username
     });
   },
   'tasks.remove'(taskId) {
@@ -68,5 +68,5 @@ Meteor.methods({
     }
 
     Tasks.update(taskId, { $set: { private: setToPrivate } });
-  },
+  }
 });

@@ -18,7 +18,7 @@ if (Meteor.isServer) {
           text: 'test task',
           createdAt: new Date(),
           owner: userId,
-          username: 'tmeasday',
+          username: 'tmeasday'
         });
       });
 
