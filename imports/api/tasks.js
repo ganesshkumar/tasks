@@ -14,15 +14,6 @@ if (Meteor.isServer) {
         { owner: this.userId },
       ],
     });
-
-    console.log(this.userId);
-    const test = Tasks.find({
-      $or: [
-        { private: { $ne: true } },
-        { owner: this.userId },
-      ],
-    });
-    console.log(test);
   });
 }
 
