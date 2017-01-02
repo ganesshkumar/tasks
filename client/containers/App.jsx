@@ -70,10 +70,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <header>
-
           <NavBar />
+        </header>
+
+        <div className="container">
           <h1>Todo List ({this.props.incompleteCount})</h1>
 
           <div className="hide-completed">
@@ -97,11 +99,11 @@ class App extends Component {
             </form> : ''
           }
 
-        </header>
-
-        <div>
-          {this.renderTasks()}
+          <div>
+            {this.renderTasks()}
+          </div>
         </div>
+        
       </div>
     );
   }

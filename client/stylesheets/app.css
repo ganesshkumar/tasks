@@ -1,9 +1,17 @@
 /*
  * General Css
  */
- 
+
 body {
   margin: 0;
+}
+
+/**
+ * Css for NavBar.jsx
+ */
+
+.container {
+  margin: 20px;
 }
 
 /**
