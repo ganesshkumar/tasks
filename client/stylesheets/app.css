@@ -1,3 +1,19 @@
+/*
+ * General Css
+ */
+ 
+body {
+  margin: 0;
+}
+
+/**
+ * Css for NavBar.jsx
+ */
+
+ .navbar {
+   box-shadow: none;
+ }
+
 /**
  * Css for Task.jsx
  */
@@ -35,4 +51,3 @@
    width: 100%;
    font-size: 1.5em;
  }
-

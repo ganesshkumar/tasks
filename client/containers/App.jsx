@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Tasks } from '../../imports/api/tasks.js';
+import { Tasks } from '../../imports/api/tasks';
 
 import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
-import Task from '../components/Task.jsx';
-import AccountsUIWrapper from '../components/AccountsUIWrapper.jsx';
+import NavBar from '../components/NavBar'
+import Task from '../components/Task';
+import AccountsUIWrapper from '../components/AccountsUIWrapper';
 
 
 // App component - represents the whole app
@@ -71,6 +72,8 @@ class App extends Component {
     return (
       <div className="container">
         <header>
+
+          <NavBar />
           <h1>Todo List ({this.props.incompleteCount})</h1>
 
           <div className="hide-completed">
