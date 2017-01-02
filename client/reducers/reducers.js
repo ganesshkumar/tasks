@@ -12,5 +12,5 @@ const todoReducer = (state = [], action) => {
 
 export default combineReducers({
   todos: todoReducer,
-  forms: formReducer,
+  forms: formReducer
 });
