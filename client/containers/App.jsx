@@ -6,14 +6,14 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Tasks } from '../../imports/api/tasks';
 
+import { signup, login, logout } from '../actions/authActions';
+
 import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import NavBar from '../components/NavBar'
 import Task from '../components/Task';
 import AccountsUIWrapper from '../components/AccountsUIWrapper';
 
-
-// App component - represents the whole app
 class App extends Component {
   constructor(props) {
     super(props);
@@ -72,7 +72,7 @@ class App extends Component {
     return (
       <div>
         <header>
-          <NavBar />
+          <NavBar handleLogout={this.props.handleLogout} />
         </header>
 
         <div className="container">
@@ -88,22 +88,25 @@ class App extends Component {
             </label>
           </div>
 
-          <AccountsUIWrapper />
-
           { this.props.currentUser ?
-            <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-              <input type="text"
-                  ref="textInput"
-                  className="text"
-                placeholder="Type to add new tasks"/>
-            </form> : ''
+            <div>
+              <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+                <input type="text"
+                    ref="textInput"
+                    className="text"
+                  placeholder="Type to add new tasks"/>
+              </form>
+              <div>
+                {this.renderTasks()}
+              </div>
+            </div> :
+            <div>
+              <AccountsUIWrapper onSubmit={this.props.handleSignup}/>
+              <AccountsUIWrapper onSubmit={this.props.handleLogin}/>
+            </div>
           }
-
-          <div>
-            {this.renderTasks()}
-          </div>
         </div>
-        
+
       </div>
     );
   }
@@ -124,9 +127,11 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-
+    handleSignup: (values) => dispatch(signup(values.username, values.password)),
+    handleLogin: (values) => dispatch(login(values.username, values.password)),
+    handleLogout: (event) => dispatch(logout())
   };
 }
 

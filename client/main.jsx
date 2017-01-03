@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 
-import '../imports/config/accounts-config.js';
+//import '../imports/config/accounts-config.js';
 import App from './containers/App.jsx';
 
 import { Provider } from 'react-redux';
