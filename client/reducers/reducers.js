@@ -10,7 +10,16 @@ const todoReducer = (state = [], action) => {
   }
 };
 
+const userReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'SIGNUP_REQUEST':
+    case 'SIGNUP_RESPONSE':
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   todos: todoReducer,
-  forms: formReducer
+  form: formReducer
 });

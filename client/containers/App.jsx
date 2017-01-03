@@ -6,14 +6,14 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Tasks } from '../../imports/api/tasks';
 
+import { signup } from '../actions/actions';
+
 import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import NavBar from '../components/NavBar'
 import Task from '../components/Task';
 import AccountsUIWrapper from '../components/AccountsUIWrapper';
 
-
-// App component - represents the whole app
 class App extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +88,7 @@ class App extends Component {
             </label>
           </div>
 
-          <AccountsUIWrapper />
+          <AccountsUIWrapper onSubmit={this.props.handleSignup}/>
 
           { this.props.currentUser ?
             <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
@@ -103,7 +103,7 @@ class App extends Component {
             {this.renderTasks()}
           </div>
         </div>
-        
+
       </div>
     );
   }
@@ -124,9 +124,9 @@ const mapStateToProps = state => {
   };
 }
 
-const mapDispatchToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-
+    handleSignup: (values) => dispatch(signup(values.username, values.password))
   };
 }
 

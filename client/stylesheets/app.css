@@ -7,6 +7,14 @@ body {
 }
 
 /**
+ * Css for authentication
+ */
+
+ .auth-form-container {
+   width: 300px;
+ }
+
+/**
  * Css for NavBar.jsx
  */
 
