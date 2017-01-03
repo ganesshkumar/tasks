@@ -13,7 +13,19 @@ const todoReducer = (state = [], action) => {
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SIGNUP_REQUEST':
-    case 'SIGNUP_RESPONSE':
+    case 'LOGIN_REQUEST':
+    case 'SIGNUP_FAILURE':
+    case 'LOGIN_FAILURE':
+      return state;
+    case 'SIGNUP_SUCCESS':
+    case 'LOGIN_SUCCESS':
+      return action.user;
+    case 'LOGOUT_REQUEST':
+      return state;
+    case 'LOGOUT_SUCCESS':
+      return {};
+    case 'LOGOUT_FAILURE':
+      return state;
     default:
       return state;
   }
@@ -21,5 +33,6 @@ const userReducer = (state = {}, action) => {
 
 export default combineReducers({
   todos: todoReducer,
+  user: userReducer,
   form: formReducer
 });
