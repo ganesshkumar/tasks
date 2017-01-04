@@ -112,3 +112,17 @@ export function logout() {
     .catch(error => dispatch(logoutFailure(error)));
   }
 }
+
+// Actions to switch auth form
+
+export function signupFormSelected() {
+  return {
+    type: 'SIGNUP_FORM_SELECTED'
+  };
+}
+
+export function loginFormSelected() {
+  return {
+    type: 'LOGIN_FORM_SELECTED'
+  };
+}

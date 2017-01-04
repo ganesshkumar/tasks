@@ -6,13 +6,16 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Tasks } from '../../imports/api/tasks';
 
-import { signup, login, logout } from '../actions/authActions';
+import {
+  signup, login, logout,
+  loginFormSelected, signupFormSelected
+} from '../actions/authActions';
 
 import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import NavBar from '../components/NavBar'
 import Task from '../components/Task';
-import AccountsUIWrapper from '../components/AccountsUIWrapper';
+import AuthForm from '../components/auth/AuthForm';
 
 class App extends Component {
   constructor(props) {
@@ -69,51 +72,57 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <header>
-          <NavBar handleLogout={this.props.handleLogout} />
-        </header>
+    if (!this.props.currentUser) {
+      return (
+        <AuthForm authForm={this.props.authForm}
+                  handleSignup={this.props.handleSignup}
+                  handleLogin={this.props.handleLogin}
+                  loginLinkClicked={this.props.loginLinkClicked}
+                  signupLinkClicked={this.props.signupLinkClicked}
+        />
+      );
+    } else {
+      return (
+        <div>
+          <header>
+            <NavBar handleLogout={this.props.handleLogout} />
+          </header>
 
-        <div className="container">
-          <h1>Todo List ({this.props.incompleteCount})</h1>
-
-          <div className="hide-completed">
-            <label className="pt-control pt-switch">
-              <input type="checkbox"
-                checked={this.state.hideCompleted}
-                onChange={this.toggleHideCompleted}/>
-              <span className="pt-control-indicator"></span>
-              Hide Completed
-            </label>
-          </div>
-
-          { this.props.currentUser ?
+          <div className="container">
             <div>
+              <h1>Todo List ({this.props.incompleteCount})</h1>
+
+              <div className="hide-completed">
+                <label className="pt-control pt-switch">
+                  <input type="checkbox"
+                    checked={this.state.hideCompleted}
+                    onChange={this.toggleHideCompleted}/>
+                  <span className="pt-control-indicator"></span>
+                  Hide Completed
+                </label>
+              </div>
+
               <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
                 <input type="text"
                     ref="textInput"
                     className="text"
                   placeholder="Type to add new tasks"/>
               </form>
+
               <div>
                 {this.renderTasks()}
               </div>
-            </div> :
-            <div>
-              <AccountsUIWrapper onSubmit={this.props.handleSignup}/>
-              <AccountsUIWrapper onSubmit={this.props.handleLogin}/>
             </div>
-          }
-        </div>
+          </div>
 
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
 
 App.propTypes = {
-  subscribe: PropTypes.func.isRequired,
+  authForm: PropTypes.string.isRequired,
   tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
@@ -121,6 +130,7 @@ App.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    authForm: state.authForm,
     tasks: state.todos,
     incompleteCount: state.todos.filter(todo => !todo.checked).length,
     currentUser: Meteor.user()
@@ -131,7 +141,9 @@ const mapDispatchToProps = dispatch => {
   return {
     handleSignup: (values) => dispatch(signup(values.username, values.password)),
     handleLogin: (values) => dispatch(login(values.username, values.password)),
-    handleLogout: (event) => dispatch(logout())
+    handleLogout: (event) => dispatch(logout()),
+    loginLinkClicked: (event) => dispatch(loginFormSelected()),
+    signupLinkClicked: (event) => dispatch(signupFormSelected())
   };
 }
 
