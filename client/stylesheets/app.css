@@ -1,18 +1,43 @@
 /*
  * General Css
  */
+html {
+  height: 100%;
+}
 
 body {
   margin: 0;
+  height: 100%;
+}
+
+.render-target {
+  height: 100%;
 }
 
 /**
  * Css for authentication
  */
 
+ .auth-container {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
  .auth-form-container {
    width: 300px;
  }
+
+.auth-form-link-container {
+  margin: 20px 0 0 0;
+}
+
+.auth-form-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 /**
  * Css for NavBar.jsx
