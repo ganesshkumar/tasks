@@ -26,8 +26,20 @@ export default class Task extends Component {
       private: this.props.task.private,
     });
 
+    const buttonClassName = classnames({
+      "pt-button": true,
+      "done-button": true,
+      "pt-icon-tick": this.props.task.checked
+    });
+
     return (
       <div className={taskClassName}>
+        <div>
+            <button type="button"
+                    className={buttonClassName}
+                    onClick={this.toggleChecked.bind(this)}>
+            </button>
+        </div>
         <div className="text">
             {this.props.task.text}
         </div>

@@ -67,6 +67,11 @@ body {
   border-bottom: 0.5px #E1E8ED solid;
 }
 
+.task .done-button {
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
 .task .text {
   font-size: 1.5em;
 }
