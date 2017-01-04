@@ -21,7 +21,7 @@ function signupSuccess(user) {
 function signupFailure(username, error) {
   return {
     type: 'SIGNUP_FAILURE',
-    username, username,
+    username: username,
     error: error,
     receivedAt: Date.now()
   }

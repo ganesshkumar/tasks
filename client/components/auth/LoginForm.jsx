@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import { signupFormSelected } from '../../actions/authActions';
+
 import { Field, reduxForm } from 'redux-form'
 import { Meteor } from 'meteor/meteor';
 
-import { signupFormSelected } from '../../actions/authActions';
 import {
   validate, warn, renderName, renderPassword
 } from '../../helpers/authHelpers';

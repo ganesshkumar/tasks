@@ -1,20 +1,25 @@
 import React from 'react';
 
-export const renderName = ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div className="pt-input-group pt-large">
-    <span className="pt-icon pt-icon-person"></span>
-    <input {...input} className="pt-input" placeholder={label} type={type}/>
-    {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  </div>
-);
+export const renderName = ({ input, label, type, meta: { touched, error, warning } }) =>
+  renderField("username", { input, label, type, meta: { touched, error, warning } })
 
-export const renderPassword = ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div className="pt-input-group pt-large">
+export const renderPassword = ({ input, label, type, meta: { touched, error, warning } }) =>
+  renderField("password", { input, label, type, meta: { touched, error, warning } })
+
+const renderField = (fieldType, { input, label, type, meta: { touched, error, warning } }) => {
+  var icon = <span className="pt-icon pt-icon-person"></span>
+  if (fieldType == "password") {
     <span className="pt-icon pt-icon-lock"></span>
-    <input {...input} className="pt-input" placeholder={label} type={type}/>
-    {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  </div>
-);
+  }
+
+  return (
+    <div className="pt-input-group pt-large">
+      {icon}
+      <input {...input} className="pt-input" placeholder={label} type={type}/>
+      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+  );
+}
 
 export const validate = values => {
   const errors = {}
