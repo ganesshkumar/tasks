@@ -8,8 +8,8 @@ export const renderPassword = ({ input, label, type, meta: { touched, error, war
 
 const renderField = (fieldType, { input, label, type, meta: { touched, error, warning } }) => {
   var icon = <span className="pt-icon pt-icon-person"></span>
-  if (fieldType == "password") {
-    <span className="pt-icon pt-icon-lock"></span>
+  if (fieldType === "password") {
+    icon = <span className="pt-icon pt-icon-lock"></span>
   }
 
   return (
