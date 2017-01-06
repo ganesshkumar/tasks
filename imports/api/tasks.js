@@ -8,7 +8,6 @@ if (Meteor.isServer) {
   Meteor.publish('tasks', function tasksPublication() {
     return Tasks.find({
       $or: [
-        { private: { $ne: true } },
         { owner: this.userId }
       ]
     });
@@ -53,7 +52,7 @@ Meteor.methods({
 
     Tasks.update(taskId, { $set: { checked: setChecked } });
   },
-  
+
   'tasks.setPrivate'(taskId, setToPrivate) {
     check(taskId, String);
     check(setToPrivate, Boolean);
