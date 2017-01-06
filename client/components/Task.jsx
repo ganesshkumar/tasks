@@ -22,11 +22,11 @@ export default class Task extends Component {
     // so that we can style them nicely in CSS
     const taskClassName = classnames({
       task: true,
-      checked: this.props.task.checked,
+      done: this.props.task.checked,
       private: this.props.task.private,
     });
 
-    const buttonClassName = classnames({
+    const doneButtonClassName = classnames({
       "pt-button": true,
       "done-button": true,
       "pt-icon-tick": this.props.task.checked
@@ -35,16 +35,21 @@ export default class Task extends Component {
     return (
       <div className={taskClassName}>
         <div>
-            <button type="button"
-                    className={buttonClassName}
-                    onClick={this.toggleChecked.bind(this)}>
-            </button>
+          <button type="button"
+                  className={doneButtonClassName}
+                  onClick={this.toggleChecked.bind(this)}>
+          </button>
         </div>
         <div className="text">
-            {this.props.task.text}
+          {this.props.task.text}
         </div>
         <div className="username">
-            {this.props.task.username}
+          {this.props.task.username}
+        </div>
+        <div className="delete">
+          <span className="pt-icon-standard pt-icon-delete delete-button"
+                onClick={this.deleteThisTask.bind(this)}>
+          </span>
         </div>
       </div>
     );

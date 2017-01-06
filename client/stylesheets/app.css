@@ -81,6 +81,18 @@ body {
   margin-left: auto;
 }
 
+.task .delete {
+  margin-left: 10px;
+}
+
+.task .delete-button {
+  color: #DB3737;
+  cursor: pointer;
+}
+
+.task.done .text {
+  text-decoration: line-through;
+}
 /*
  * Css for App.jsx
  */
