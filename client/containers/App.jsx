@@ -88,7 +88,7 @@ class App extends Component {
             <NavBar handleLogout={this.props.handleLogout} />
           </header>
 
-          <div className="container">
+          <div className="app-container">
             <div>
               <h1>Todo List ({this.props.incompleteCount})</h1>
 

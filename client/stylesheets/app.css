@@ -43,8 +43,9 @@ body {
  * Css for NavBar.jsx
  */
 
-.container {
+.app-container {
   margin: 20px;
+  width: 50%;
 }
 
 /**
@@ -91,6 +92,7 @@ body {
 }
 
 .task.done .text {
+  color: #8A9BA8;
   text-decoration: line-through;
 }
 /*
