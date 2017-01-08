@@ -6,7 +6,7 @@ export default CompletedFilter = (props) => (
       <input type="checkbox"
         checked={props.shouldHideCompleted}
         onChange={props.toggleHideCompleted}/>
-      <span className="pt-control-indicator"></span>
+      <span className="pt-control-indicator no-outline"></span>
       Hide Completed
     </label>
   </div>

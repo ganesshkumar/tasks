@@ -87,13 +87,13 @@ var Task = (props) => {
   const taskClassName = classnames({
     task: true,
     done: props.task.checked,
-    hidden: isDragging,
-    private: props.task.private,
+    hidden: isDragging
   });
 
   const doneButtonClassName = classnames({
     "pt-button": true,
     "done-button": true,
+    "no-outline": true,
     "pt-icon-tick": props.task.checked
   });
 

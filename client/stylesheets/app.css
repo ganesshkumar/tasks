@@ -14,6 +14,9 @@ body {
   height: 100%;
 }
 
+.no-outline {
+  outline: none !important;
+}
 /**
  * Css for authentication
  */
@@ -108,14 +111,24 @@ body {
    flex-direction: row;
    align-items: center;
    justify-content: flex-start;
-   padding: 10px 0;
+   padding: 20px 0;
  }
 
  .new-task .text-input {
    width: 100%;
    font-size: 1.5em;
+   border: 0;
+   outline: none;
  }
 
  .new-task .submit-button {
    display: none;
  }
+
+ /**
+  * Css for task filters
+  */
+
+.pt-control.pt-switch .no-outline {
+  outline: none;
+}
