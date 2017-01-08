@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 const NewTask = (props) => {
-  console.log(props)
   return (
     <div>
       <form className="new-task" onSubmit={props.handleSubmit} >

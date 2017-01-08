@@ -68,6 +68,10 @@ body {
   border-bottom: 0.5px #E1E8ED solid;
 }
 
+.task.hidden {
+    opacity: 0;
+}
+
 .task .done-button {
   border-radius: 50%;
   margin: 0 10px;

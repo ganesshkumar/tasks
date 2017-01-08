@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import classnames from 'classnames';
 
 import { hideCompleted, showCompleted } from '../actions/filterActions';
@@ -34,7 +36,7 @@ const TaskPanel = (props) => {
       <CompletedFilter shouldHideCompleted={props.shouldHideCompleted}
                        toggleHideCompleted={toggleHideCompleted} />
 
-      <TaskList filteredTasks={props.filteredTasks} />
+      <TaskList />
     </div>
   );
 }
@@ -42,7 +44,6 @@ const TaskPanel = (props) => {
 TaskPanel.propTypes = {
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
-  tasks: PropTypes.array.isRequired,
   filteredTasks: PropTypes.array.isRequired,
   shouldHideCompleted: PropTypes.bool.isRequired,
   incompleteCount: PropTypes.number.isRequired
@@ -50,7 +51,6 @@ TaskPanel.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    tasks: state.todos,
     filteredTasks: state.todoFilters.hideCompleted ?
         state.todos.filter(task => !task.checked) : state.todos,
     shouldHideCompleted: state.todoFilters.hideCompleted,
@@ -65,4 +65,4 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubscribeComponent(TaskPanel));
+export default connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(SubscribeComponent(TaskPanel)));
