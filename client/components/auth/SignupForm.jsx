@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { loginFormSelected } from '../../actions/authActions';
 
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
 import { Meteor } from 'meteor/meteor';
 
 import {
@@ -18,7 +18,7 @@ const SignupForm = (props) => {
         <div className="pt-control-group pt-vertical">
           <Field name="username" type="text" component={renderName} label="Username"/>
           <Field name="password" type="password" component={renderPassword} label="Password"/>
-          <button type="submit"className="pt-button pt-large pt-intent-primary">Signup</button>
+          <button type="submit" className="pt-button pt-large pt-intent-primary">Signup</button>
         </div>
       </form>
 
@@ -34,7 +34,7 @@ const SignupForm = (props) => {
 }
 
 export default reduxForm({
-  form: 'auth',  // a unique identifier for this form
-  validate,                // <--- validation function given to redux-form
-  warn                     // <--- warning function given to redux-form
+  form: 'auth',
+  validate,
+  warn
 })(SignupForm)

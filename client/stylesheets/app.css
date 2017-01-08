@@ -104,10 +104,14 @@ body {
    flex-direction: row;
    align-items: center;
    justify-content: flex-start;
-   padding: 20px;
+   padding: 10px 0;
  }
 
- .new-task .text {
+ .new-task .text-input {
    width: 100%;
    font-size: 1.5em;
+ }
+
+ .new-task .submit-button {
+   display: none;
  }

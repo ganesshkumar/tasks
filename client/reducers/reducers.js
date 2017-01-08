@@ -42,8 +42,27 @@ const authForm = (state = 'LOGIN_FORM', action) => {
   }
 }
 
+const todoFilters = (state = {
+  hideCompleted: false
+}, action) => {
+    switch (action.type) {
+      case 'HIDE_COMPLETED':
+        return Object.assign({}, state, {
+          hideCompleted: true
+        });
+      case 'SHOW_COMPLETED':
+        return Object.assign({}, state, {
+          hideCompleted: false
+        });
+      default:
+        return state;
+    }
+}
+
+
 export default combineReducers({
   todos: todoReducer,
+  todoFilters: todoFilters,
   user: userReducer,
   authForm: authForm,
   form: formReducer
