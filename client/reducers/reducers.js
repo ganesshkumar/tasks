@@ -38,9 +38,10 @@ const pushFinishedTasksToBottom = (todos, todosOrder) => {
 const todoReducer = (state = [], action) => {
   switch (action.type) {
     case 'COMPUTE_ORDER_AND_SET_TODOS':
-      return computeTasksOrder(action.todos,
+      return computeTasksOrder(
+        action.todos,
         pushFinishedTasksToBottom(action.todos, action.todosOrder),
-        state
+        []
       );
     case 'SET_TODOS':
       return action.todos || state;
