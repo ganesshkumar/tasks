@@ -29,7 +29,7 @@ function signupFailure(username, error) {
 
 export function signup(username, password) {
   return dispatch => {
-    dispatch(signupRequest(username, password))
+    dispatch(signupRequest(username, password));
     return new Promise((resolve, reject) => {
       Accounts.createUser({
         username,
@@ -69,7 +69,7 @@ function loginFailure(username, error) {
 
 export function login(username, password) {
   return dispatch => {
-    dispatch(loginRequest(username, password))
+    dispatch(loginRequest(username, password));
     return new Promise((resolve, reject) => {
       Meteor.loginWithPassword(username, password,
         (error) => error ? reject(error) : resolve());
@@ -104,7 +104,7 @@ function logoutFailure(error) {
 
 export function logout() {
   return dispatch => {
-    dispatch(logoutRequest())
+    dispatch(logoutRequest());
     return new Promise((resolve, reject) => {
       Meteor.logout((error) => error ? reject(error) : resolve());
     })

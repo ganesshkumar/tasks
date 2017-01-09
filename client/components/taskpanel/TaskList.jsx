@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Task from '../task/Task';
-import { setTodos } from '../../actions/taskActions';
+import { reorderTodos } from '../../actions/taskActions';
 
 const TaskList = (props) => (
   <div>
@@ -10,7 +10,7 @@ const TaskList = (props) => (
                    index={i}
                    task={task}
                    moveTask={props.moveTask}
-                   setTodos={props.setTodos}
+                   reorderTodos={props.reorderTodos}
              />
     })}
   </div>
@@ -33,12 +33,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setTodos: (todos) => dispatch(setTodos(todos))
+    reorderTodos: (todos) => dispatch(reorderTodos(todos))
   }
 }
 
 TaskList.propTypes = {
   filteredTasks: PropTypes.array.isRequired,
+  reorderTodos: PropTypes.func.isRequired,
   moveTask: PropTypes.func.isRequired
 };
 

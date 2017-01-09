@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
+export const TaskOrder = new Mongo.Collection('task-order');
 
 if (Meteor.isServer) {
   Meteor.publish('tasks', function tasksPublication() {
@@ -10,6 +11,12 @@ if (Meteor.isServer) {
       $or: [
         { owner: this.userId }
       ]
+    });
+  });
+
+  Meteor.publish('taskOrder', function taskOrderPublication() {
+    return TaskOrder.find({
+      _id: this.userId
     });
   });
 }
@@ -63,5 +70,13 @@ Meteor.methods({
     }
 
     Tasks.update(taskId, { $set: { private: setToPrivate } });
+  },
+
+  'tasks.setOrder'(userId, taskIds) {
+    check(userId, String);
+    check(taskIds, [String]);
+
+    // [TODO] Add check here
+    TaskOrder.update(userId, {tasksOrder: taskIds}, {upsert: true});
   }
 });

@@ -1,8 +1,47 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
+const computeTasksOrder = (todos, todosOrder, state) => {
+  if (!todos || todos.length < 1) {
+      return state;
+  }
+  const orderedTodos = [];
+  // construct a map of todo._id, todo
+  todos = todos.reduce((todosMap, todo) => {
+    todosMap[todo._id] = todo;
+    return todosMap;
+  }, {});
+  // Add todos to orderedTodos based on todosOrder
+  todosOrder.forEach(id => {
+    orderedTodos.push(todos[id]);
+    delete todos[id]
+  });
+  // Add any element whose id was not in the todosOrder
+  Object.keys(todos).forEach(todo => orderedTodos.push(todo));
+  return orderedTodos;
+}
+
+const pushFinishedTasksToBottom = (todos, todosOrder) => {
+  if (!todosOrder || todosOrder.length < 1) {
+    return todosOrder;
+  }
+  // construct a map of todo._id, todo
+  todos = todos.reduce((todosMap, todo) => {
+    todosMap[todo._id] = todo;
+    return todosMap;
+  }, {});
+
+  return todosOrder.filter(_id => !todos[_id].checked)
+    .concat(todosOrder.filter(_id => todos[_id].checked));
+}
+
 const todoReducer = (state = [], action) => {
   switch (action.type) {
+    case 'COMPUTE_ORDER_AND_SET_TODOS':
+      return computeTasksOrder(action.todos,
+        pushFinishedTasksToBottom(action.todos, action.todosOrder),
+        state
+      );
     case 'SET_TODOS':
       return action.todos || state;
     default:
