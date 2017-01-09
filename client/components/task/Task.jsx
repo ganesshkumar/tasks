@@ -60,6 +60,7 @@ Task.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
   moveTask: PropTypes.func.isRequired,
+  canMoveTask: PropTypes.func.isRequired,
   reorderTodos: PropTypes.func.isRequired
 };
 

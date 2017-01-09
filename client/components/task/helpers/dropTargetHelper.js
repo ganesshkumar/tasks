@@ -7,7 +7,7 @@ export function collectTarget(connect) {
 }
 
 export const taskTarget = {
-  hover(props, monitor, component) {
+  hover: (props, monitor, component) => {
     const dragIndex = monitor.getItem().index;
     const hoverIndex = props.index;
 
@@ -43,8 +43,10 @@ export const taskTarget = {
     }
 
     // Time to actually perform the action
-    const reorderedTodos = props.moveTask(dragIndex, hoverIndex);
-    props.reorderTodos(reorderedTodos);
+    if (props.canMoveTask(dragIndex, hoverIndex)) {
+      const reorderedTodos = props.moveTask(dragIndex, hoverIndex);
+      props.reorderTodos(reorderedTodos);      
+    }
 
     // Note: we're mutating the monitor item here!
     // Generally it's better to avoid mutations,
