@@ -7,6 +7,7 @@ const NewTask = (props) => {
       <form className="new-task" onSubmit={props.handleSubmit} >
         <Field name="task"
                type="text"
+               autoComplete={"off"}
                component="input"
                className="text-input"
                placeholder="Type to add a new task"/>

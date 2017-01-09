@@ -67,7 +67,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 10px;
   border-bottom: 0.5px #E1E8ED solid;
 }
 
@@ -78,14 +78,19 @@ body {
 .task .done-button {
   border-radius: 50%;
   margin: 0 10px;
+  min-height: 25px;
+  min-width: 25px;
 }
 
+/*
 .task .text {
   font-size: 1.5em;
 }
+*/
 
 .task .username {
   color: #8A9BA8;
+  font-size: 0.8em;
   margin-left: auto;
 }
 
