@@ -17,7 +17,7 @@ const computeTasksOrder = (todos, todosOrder, state) => {
     delete todos[id]
   });
   // Add any element whose id was not in the todosOrder
-  Object.keys(todos).forEach(todo => orderedTodos.push(todo));
+  Object.keys(todos).forEach(_id => orderedTodos.push(todos[_id]));
   return orderedTodos;
 }
 

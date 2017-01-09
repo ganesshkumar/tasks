@@ -5,6 +5,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import classnames from 'classnames';
 
 import { hideCompleted, showCompleted } from '../actions/filterActions';
+import { createTask } from '../actions/taskActions';
 
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import Header from '../components/taskpanel/Header';
@@ -24,7 +25,7 @@ const TaskPanel = (props) => {
 
   const handleNewTask = (values) => {
     event.preventDefault();
-    Meteor.call('tasks.insert', values.task);
+    props.createTask(values.task);
   }
 
   return (
@@ -42,6 +43,7 @@ const TaskPanel = (props) => {
 }
 
 TaskPanel.propTypes = {
+  createTask: PropTypes.func.isRequired,
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
   filteredTasks: PropTypes.array.isRequired,
@@ -60,6 +62,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    createTask: (text) => dispatch(createTask(text)),
     hideCompleted: () => dispatch(hideCompleted()),
     showCompleted: () => dispatch(showCompleted())
   };

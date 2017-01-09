@@ -25,7 +25,8 @@ Meteor.methods({
   'tasks.insert'(text) {
     check(text, String);
 
-    if (! this.userId) {
+    const userId = this.userId;
+    if (!userId) {
       throw new Meteor.Error('not-authorized');
     }
 
@@ -33,7 +34,20 @@ Meteor.methods({
       text,
       createdAt: new Date(),
       owner: this.userId,
-      username: Meteor.users.findOne(this.userId).username
+      username: Meteor.users.findOne(userId).username
+    }, (error, result) => {
+      console.log(error, result)
+      if (!error) {
+        const taskOrder = TaskOrder.findOne({_id: userId});
+        if (!taskOrder) {
+          TaskOrder.insert({_id: userId, tasksOrder: [result]});
+        } else {
+          TaskOrder.update(
+            { _id: userId },
+            { $push: { tasksOrder: { $each: [result], $position: 0 }}}
+          );
+        }
+      } else {console.error(error)}
     });
   },
 
