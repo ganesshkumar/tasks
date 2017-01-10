@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Field, reduxForm } from 'redux-form';
 import classnames from 'classnames';
 
 import {
@@ -8,7 +9,7 @@ import {
   Position
 } from '@blueprintjs/core';
 
-export default NavBar = (props) => {
+const NavBar = (props) => {
   let popoverContent = (
     <ul className={'pt-menu pt-elevation-1'}>
         <li className={'pt-menu-divider'}></li>
@@ -23,7 +24,17 @@ export default NavBar = (props) => {
   return (
     <nav className="navbar pt-navbar">
       <div className="pt-navbar-group pt-align-left">
-        <div className="pt-navbar-heading"> <h3>Tasks</h3> </div>
+        <div className="pt-navbar-heading">
+          <span className="title">Tasks</span>
+        </div>
+        <form className="search">
+          <Field name="searchTerm"
+                 type="text"
+                 autoComplete={"off"}
+                 component="input"
+                 className="pt-input search-input"
+                 placeholder="Search tasks"/>
+        </form>
       </div>
       <div className="pt-navbar-group pt-align-right">
         <Popover content={popoverContent}
@@ -38,3 +49,8 @@ export default NavBar = (props) => {
     </nav>
   );
 }
+
+
+export default reduxForm({
+  form: 'search',
+})(NavBar)

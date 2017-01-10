@@ -57,10 +57,8 @@ class App extends Component {
 App.propTypes = {
   // Add props for functions
   authForm: PropTypes.string.isRequired,
-  shouldHideCompleted: PropTypes.bool.isRequired,
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
-  tasks: PropTypes.array.isRequired,
   incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
 };
@@ -68,8 +66,6 @@ App.propTypes = {
 const mapStateToProps = state => {
   return {
     authForm: state.authForm,
-    shouldHideCompleted: state.todoFilters.hideCompleted,
-    tasks: state.todos,
     incompleteCount: state.todos.filter(todo => !todo.checked).length,
     currentUser: Meteor.user()
   };

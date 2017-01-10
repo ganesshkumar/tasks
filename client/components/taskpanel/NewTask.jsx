@@ -11,7 +11,7 @@ const NewTask = (props) => {
                component="input"
                className="text-input"
                placeholder="Type to add a new task"/>
-             <button type="submit" className="submit-button">Submit</button>
+         <button type="submit" className="submit-button">Submit</button>
       </form>
     </div>
   );

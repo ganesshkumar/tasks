@@ -19,8 +19,21 @@ const TaskList = (props) => (
 
 const mapStateToProps = state => {
   return {
-    filteredTasks: state.todoFilters.hideCompleted ?
-        state.todos.filter(task => !task.checked) : state.todos,
+    filteredTasks: ((state) => {
+      var todos = state.todos;
+      // Apply hide completed filter
+      if (state.todoFilters.hideCompleted) {
+        todos = todos.filter(task => !task.checked);
+      }
+      // Apply search filter
+      console.lo
+      if (state.form.search && state.form.search.values
+          && state.form.search.values.searchTerm) {
+        todos = todos.filter(
+          task => task.text.includes(state.form.search.values.searchTerm));
+      }
+      return todos;
+    })(state),
 
     canMoveTask: (dragIndex, hoverIndex) => {
       const dragTodo = state.todos[dragIndex];
