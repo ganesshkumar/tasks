@@ -17,13 +17,13 @@ export default tasksReducer = (state = [], action) => {
 const uiTasksReducer = (state =[], action) => {
   switch (action.type) {
     case 'EDIT_TASK':
-      return findTaskAndAddProperty(state, 'editing');
+      return findTaskAndAddProperty(state, action.id, 'editing',);
     case 'CANCEL_EDIT_TASK':
-      return findTaskAndRemoveProperty(state, 'editing');
+      return findTaskAndRemoveProperty(state, action.id, 'editing');
     case 'SELECT_TASK':
-      return findTaskAndAddProperty(state, 'selected');
+      return findTaskAndAddProperty(state, action.id, 'selected');
     case 'DESELECT_TASK':
-      return findTaskAndRemoveProperty(state, 'selected');
+      return findTaskAndRemoveProperty(state, action.id, 'selected');
     default:
       return state;
   }
@@ -31,12 +31,14 @@ const uiTasksReducer = (state =[], action) => {
 
 const findTaskAndAddProperty = (tasks, taskId, label) => {
   let currentTask = findTaskById(tasks, taskId);
+  console.log(currentTask, taskId, label);
   setAttribute(currentTask, label);
   return tasks.slice();
 }
 
 const findTaskAndRemoveProperty = (tasks, taskId, label) => {
   currentTask = findTaskById(tasks, taskId);
+  console.log(currentTask, taskId, label);
   removeAttribute(currentTask, label);
   return tasks.slice();
 }
@@ -50,8 +52,8 @@ const setAttribute = (task, label) => {
 }
 
 const removeAttribute = (task, label) => {
-  if (label in currentTask) {
-    delete(currentTask[label]);
+  if (label in task) {
+    delete(task[label]);
   }
 }
 

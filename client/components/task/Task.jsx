@@ -99,7 +99,7 @@ var Task = (props) => {
         <EditTask task={props.task}
                   onSubmit={onEditTaskSubmit}
                   cancelEditTask={props.cancelEditTask}
-                  initialValues = {{editText: task.text}}
+                  initialValues = {{editText: props.task.text}}
                   isDragging={props.isDragging}/>
       </div>
     );
