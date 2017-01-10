@@ -26,7 +26,6 @@ const mapStateToProps = state => {
         todos = todos.filter(task => !task.checked);
       }
       // Apply search filter
-      console.lo
       if (state.form.search && state.form.search.values
           && state.form.search.values.searchTerm) {
         todos = todos.filter(
