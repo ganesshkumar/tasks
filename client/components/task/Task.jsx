@@ -87,8 +87,10 @@ var Task = (props) => {
     if ('editing' in task) {
       delete(task.editing);
     }
-    console.log(task);
+    // Todo: Move this to the callback from update call
+    props.cancelEditTask(props.task._id);
     updateTask(task);
+
   }
 
   let renderEditTask = (props) => {

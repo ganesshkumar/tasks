@@ -38,32 +38,43 @@ const pushFinishedTasksToBottom = (todos, todosOrder) => {
 const todoReducer = (state = [], action) => {
   switch (action.type) {
     case 'COMPUTE_ORDER_AND_SET_TODOS':
-      return computeTasksOrder(
+      state = computeTasksOrder(
         action.todos,
         pushFinishedTasksToBottom(action.todos, action.todosOrder),
         []
       );
+      break;
     case 'SET_TODOS':
-      return action.todos || state;
+      state = action.todos || state;
+      break;
     case 'EDIT_TASK':
-      currentTask = state.find(task => task._id == action.id);
+      currentTask = state.find(task => task._id === action.id);
       currentTask.editing = true;
-      return state.slice();
+      state = state.slice();
+      break;
     case 'CANCEL_EDIT_TASK':
-      currentTask = state.find(task => task._id == action.id);
-      ('editing' in currentTask) && delete(currentTask.editing);
-      return state.slice();
+      currentTask = state.find(task => task._id === action.id);
+      if ('editing' in currentTask) {
+        delete(currentTask.editing);
+      }
+      state = state.slice();
+      break;
     case 'SELECT_TASK':
-      currentTask = state.find(task => task._id == action.id);
+      currentTask = state.find(task => task._id === action.id);
       currentTask.selected = true;
-      return state.slice();
+      state = state.slice();
+      break;
     case 'DESELECT_TASK':
-      task = state.find(task => task._id == action.id);
-      ('selected' in currentTask) && delete(currentTask.selected);
-      return state.slice();
+      task = state.find(task => task._id === action.id);
+      if ('selected' in currentTask) {
+        delete(currentTask.selected);
+      }
+      state = state.slice();
+      break;
     default:
-      return state;
+      break;
   }
+  return state;
 };
 
 const userReducer = (state = {}, action) => {
