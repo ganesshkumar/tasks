@@ -45,6 +45,22 @@ const todoReducer = (state = [], action) => {
       );
     case 'SET_TODOS':
       return action.todos || state;
+    case 'EDIT_TASK':
+      currentTask = state.find(task => task._id == action.id);
+      currentTask.editing = true;
+      return state.slice();
+    case 'CANCEL_EDIT_TASK':
+      currentTask = state.find(task => task._id == action.id);
+      ('editing' in currentTask) && delete(currentTask.editing);
+      return state.slice();
+    case 'SELECT_TASK':
+      currentTask = state.find(task => task._id == action.id);
+      currentTask.selected = true;
+      return state.slice();
+    case 'DESELECT_TASK':
+      task = state.find(task => task._id == action.id);
+      ('selected' in currentTask) && delete(currentTask.selected);
+      return state.slice();
     default:
       return state;
   }

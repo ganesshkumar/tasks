@@ -1,16 +1,22 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Task from '../task/Task';
-import { reorderTodos } from '../../actions/taskActions';
+
+import {
+  editTask, cancelEditTask, selectTask, deselectTask, reorderTodos
+} from '../../actions/taskActions';
 
 const TaskList = (props) => (
   <div>
     {props.filteredTasks.map((task, i) => {
       return <Task key={task._id}
-                   index={i}
-                   task={task}
+                   index={i} task={task}
                    moveTask={props.moveTask}
                    canMoveTask={props.canMoveTask}
+                   editTask={props.editTask}
+                   cancelEditTask={props.cancelEditTask}
+                   selectTask={props.selectTask}
+                   deselectTask={props.deselectTask}
                    reorderTodos={props.reorderTodos}
              />
     })}
@@ -54,7 +60,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    reorderTodos: (todos) => dispatch(reorderTodos(todos))
+    reorderTodos: (todos) => dispatch(reorderTodos(todos)),
+    editTask: (taskId) => dispatch(editTask(taskId)),
+    cancelEditTask: (taskId) => dispatch(cancelEditTask(taskId)),
+    selectTask: (taskId) => dispatch(selectTask(taskId)),
+    deselectTask: (taskId) => dispatch(deselectTask(taskId)),
   }
 }
 
@@ -62,7 +72,11 @@ TaskList.propTypes = {
   filteredTasks: PropTypes.array.isRequired,
   reorderTodos: PropTypes.func.isRequired,
   moveTask: PropTypes.func.isRequired,
-  canMoveTask: PropTypes.func.isRequired
+  canMoveTask: PropTypes.func.isRequired,
+  editTask: PropTypes.func.isRequired,
+  cancelEditTask: PropTypes.func.isRequired,
+  selectTask: PropTypes.func.isRequired,
+  deselectTask: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

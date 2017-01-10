@@ -51,6 +51,15 @@ Meteor.methods({
     });
   },
 
+  'tasks.update'(task) {
+    // Todo: Add check here
+    if (task.owner !== this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Tasks.update(task._id, task);
+  },
+
   'tasks.remove'(taskId) {
     check(taskId, String);
 

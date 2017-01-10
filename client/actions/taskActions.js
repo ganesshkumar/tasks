@@ -12,6 +12,10 @@ export function createTask(text) {
   }
 }
 
+export function updateTask(task) {
+  Meteor.call('tasks.update', task);
+}
+
 export function reorderTodos(todos) {
   return dispatch => {
     new Promise((resolve, reject) => {
@@ -22,6 +26,38 @@ export function reorderTodos(todos) {
       );
     })
     .catch(error => console.error('Reorder failed'));
+  }
+}
+
+/**
+ * Following actions affects only UI state
+ */
+
+export function editTask(taskId) {
+  return {
+    type: 'EDIT_TASK',
+    id: taskId
+  }
+}
+
+export function cancelEditTask(taskId) {
+  return {
+    type: 'CANCEL_EDIT_TASK',
+    id: taskId
+  }
+}
+
+export function selectTask(taskId) {
+  return {
+    type: 'SELECT_TASK',
+    id: taskId
+  }
+}
+
+export function deselectTask(taskId) {
+  return {
+    type: 'DESELECT_TASK',
+    id: taskId
   }
 }
 

@@ -48,7 +48,7 @@ body {
 
 .app-container {
   margin: 20px;
-  width: 50%;
+  width: 30%;
 }
 
 .title {
@@ -76,6 +76,19 @@ body {
   border-bottom: 0.5px #E1E8ED solid;
 }
 
+.task.editing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 0.5px #E1E8ED solid;
+}
+
+.task.selected {
+  background-color: #E1E8ED;
+}
+
 .task.hidden {
     opacity: 0;
 }
@@ -93,24 +106,43 @@ body {
 }
 */
 
-.task .username {
-  color: #8A9BA8;
-  font-size: 0.8em;
-  margin-left: auto;
-}
-
-.task .delete {
-  margin-left: 10px;
-}
-
-.task .delete-button {
-  color: #DB3737;
-  cursor: pointer;
-}
-
 .task.done .text {
   color: #8A9BA8;
   text-decoration: line-through;
+}
+
+.task .username {
+  color: #8A9BA8;
+  font-size: 0.8em;
+}
+
+.task .more {
+  display: none;
+}
+
+.task:hover .more {
+  display: flex;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.task .editform {
+  width: 100%;
+}
+
+.task .editform .edit-input {
+  width: 100%;
+  font-size: 1em;
+  border: 0;
+  outline: none;
+}
+
+.task .edit-form-save-button {
+  margin: 5px 5px 0px 0px;
+}
+
+.task .edit-form-cancel-button {
+  margin: 5px 0px 0px 5px;
 }
 /*
  * Css for App.jsx
