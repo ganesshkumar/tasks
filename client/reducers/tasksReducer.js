@@ -1,4 +1,4 @@
-export default const todoReducer = (state = [], action) => {
+export default tasksReducer = (state = [], action) => {
   switch (action.type) {
     case 'COMPUTE_ORDER_AND_SET_TODOS':
       return computeTasksOrder(
