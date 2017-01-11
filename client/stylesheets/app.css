@@ -21,17 +21,17 @@ body {
  * Css for authentication
  */
 
- .auth-container {
-   width: 100%;
-   height: 100%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
+.auth-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
- .auth-form-container {
-   width: 300px;
- }
+.auth-form-container {
+  width: 300px;
+}
 
 .auth-form-link-container {
   margin: 20px 0 0 0;
@@ -48,7 +48,7 @@ body {
 
 .app-container {
   margin: 20px;
-  width: 30%;
+  width: 50%;
 }
 
 .title {
@@ -133,7 +133,9 @@ body {
 .task .editform .edit-input {
   width: 100%;
   font-size: 1em;
-  border: 0;
+}
+
+.task .editform .edit-input:focus {
   outline: none;
 }
 
@@ -144,6 +146,19 @@ body {
 .task .edit-form-cancel-button {
   margin: 5px 0 0 5px;
 }
+
+.duedate-picker .duedate-button-group {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-top: 5px;
+}
+
+.duedate-picker .duedate-button-group a {
+  flex: 1;
+}
+
+
 /*
  * Css for App.jsx
  */

@@ -83,7 +83,10 @@ var Task = (props) => {
   }
 
   const onEditTaskSubmit = (values) => {
-    let task = Object.assign({}, props.task, {text: values.editText});
+    let task = Object.assign({}, props.task, {
+      text: values.editText,
+      dueDate: values.dueDate
+    });
     if ('editing' in task) {
       delete(task.editing);
     }
