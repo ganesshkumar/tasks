@@ -17,7 +17,7 @@ export default tasksReducer = (state = [], action) => {
 const uiTasksReducer = (state =[], action) => {
   switch (action.type) {
     case 'EDIT_TASK':
-      return findTaskAndAddProperty(state, action.id, 'editing',);
+      return findTaskAndAddProperty(state, action.id, 'editing');
     case 'CANCEL_EDIT_TASK':
       return findTaskAndRemoveProperty(state, action.id, 'editing');
     case 'SELECT_TASK':
@@ -29,16 +29,16 @@ const uiTasksReducer = (state =[], action) => {
   }
 }
 
+// Helper functions
+
 const findTaskAndAddProperty = (tasks, taskId, label) => {
   let currentTask = findTaskById(tasks, taskId);
-  console.log(currentTask, taskId, label);
   setAttribute(currentTask, label);
   return tasks.slice();
 }
 
 const findTaskAndRemoveProperty = (tasks, taskId, label) => {
   currentTask = findTaskById(tasks, taskId);
-  console.log(currentTask, taskId, label);
   removeAttribute(currentTask, label);
   return tasks.slice();
 }
@@ -56,6 +56,8 @@ const removeAttribute = (task, label) => {
     delete(task[label]);
   }
 }
+
+// Helpers to compute the order of tasks being shown
 
 const computeTasksOrder = (todos, todosOrder, state) => {
   if (!todos || todos.length < 1) {

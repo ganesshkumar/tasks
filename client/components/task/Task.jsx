@@ -39,7 +39,7 @@ var Task = (props) => {
     <ul className={'pt-menu pt-elevation-1'}>
         <li className={'pt-menu-divider'}></li>
         <li>
-          <a className="pt-menu-item pt-icon-edit"
+          <a className="pt-menu-item pt-icon-edit pt-popover-dismiss"
              onClick={(event) => {
                props.editTask(props.task._id);
                props.deselectTask(props.task._id);
@@ -71,7 +71,7 @@ var Task = (props) => {
 
         <div className="more pt-align-right" onClick={(event) => props.selectTask(props.task._id)}>
           <Popover content={moreMenuContent}
-                   isOpen={props.task.selected}
+                   onClose={(e) => props.task.selected && props.deselectTask(props.task._id)}
                    interactionKind={PopoverInteractionKind.CLICK}
                    position={Position.BOTTOM_RIGHT}
                    useSmartPositioning={true}>
