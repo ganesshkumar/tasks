@@ -133,7 +133,7 @@ body {
   font-size: 0.9em;
 }
 
-.task.done .due-date .over-due {
+.task .due-date .done {
   color: #8F398F;
 }
 
