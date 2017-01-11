@@ -72,7 +72,8 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   border-bottom: 0.5px #E1E8ED solid;
 }
 
@@ -81,7 +82,8 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   border-bottom: 0.5px #E1E8ED solid;
 }
 
@@ -93,18 +95,21 @@ body {
     opacity: 0;
 }
 
+.task .done-button-container {
+  #max-width: 30px;
+}
+
 .task .done-button {
   border-radius: 50%;
   margin: 0 10px;
   min-height: 30px;
-  min-width: 30px;
+  #min-width: 30px;
 }
 
-/*
-.task .text {
-  font-size: 1.5em;
+.task .main-container {
+  flex: 1 1 auto;
+  overflow: auto;
 }
-*/
 
 .task.done .text {
   color: #8A9BA8;
@@ -113,7 +118,39 @@ body {
 
 .task .username {
   color: #8A9BA8;
-  font-size: 0.8em;
+  font-size: 0.9em;
+}
+
+.task .secondary-container {
+  margin-right: 20px;
+}
+
+.task:hover .secondary-container {
+  margin-right: 10px;
+}
+
+.task .due-date {
+  font-size: 0.9em;
+}
+
+.task.done .due-date .over-due {
+  color: #8F398F;
+}
+
+.task .due-date .over-due {
+  color: #D13913;
+}
+
+.task .due-date .today {
+  color: #D99E0B;
+}
+
+.task .due-date .this-week {
+  color: #2965CC;
+}
+
+.task .due-date .someday {
+  color: #29A634;
 }
 
 .task .more {
@@ -122,6 +159,7 @@ body {
 
 .task:hover .more {
   display: flex;
+  width: 10px;
   margin-left: auto;
   cursor: pointer;
 }
@@ -129,6 +167,10 @@ body {
 .task .editform {
   width: 100%;
 }
+
+/*
+ * Css for edit form of task
+ */
 
 .task .editform .edit-input {
   width: 100%;

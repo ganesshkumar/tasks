@@ -16,7 +16,7 @@ export const renderDatePicker = (props) => {
 
         <Tooltip content="Today" position={Position.BOTTOM}>
           <a className="pt-button pt-icon-calendar pt-popover-dismiss"
-             onClick={(event) => props.input.onChange(moment().startOf('day').toDate())}
+             onClick={(event) => props.input.onChange(moment().startOf('day').add({hours: 12}).toDate())}
              role="button">
             {moment().startOf('day').format('DD')}
           </a>
@@ -26,7 +26,7 @@ export const renderDatePicker = (props) => {
             content={"Tomorrow, " + moment().startOf('day')
               .add({days: 1}).format('DD MMM')} >
           <a className="pt-button pt-icon-chevron-right pt-popover-dismiss"
-             onClick={(event) => props.input.onChange(moment().startOf('day').add({days: 1}).toDate())}
+             onClick={(event) => props.input.onChange(moment().startOf('day').add({days: 1, hours: 12}).toDate())}
              role="button">
           </a>
         </Tooltip>
@@ -35,7 +35,7 @@ export const renderDatePicker = (props) => {
             content={"Next week, " + moment().startOf('day')
               .add({weeks: 1}).format('DD MMM')} >
           <a className="pt-button pt-icon-double-chevron-right pt-popover-dismiss"
-             onClick={(event) => props.input.onChange(moment().startOf('day').add({weeks: 1}).toDate())}
+             onClick={(event) => props.input.onChange(moment().startOf('day').add({weeks: 1, hours: 12}).toDate())}
              role="button">
           </a>
         </Tooltip>
@@ -44,7 +44,7 @@ export const renderDatePicker = (props) => {
             content={"Next month, " + moment().startOf('day')
               .add({months: 1}).format('DD MMM')} >
           <a className="pt-button pt-icon-timeline-events pt-popover-dismiss"
-             onClick={(event) => props.input.onChange(moment().startOf('day').add({months: 1}).toDate())}
+             onClick={(event) => props.input.onChange(moment().startOf('day').add({months: 1, hours: 12}).toDate())}
              role="button">
           </a>
         </Tooltip>

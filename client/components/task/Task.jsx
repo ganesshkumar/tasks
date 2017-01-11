@@ -7,15 +7,13 @@ import { updateTask } from '../../actions/taskActions';
 import { taskSource, collectSource } from './helpers/dragSourceHelper';
 import { taskTarget, collectTarget} from './helpers/dropTargetHelper';
 import { ItemTypes } from '../../constants/ItemTypes';
+import DueDate from './DueDate';
 
 import {
   Popover,
   PopoverInteractionKind,
   Position
 } from '@blueprintjs/core';
-//togglePrivate() {
-//  Meteor.call('tasks.setPrivate', this.props.task._id, !this.props.task.private);
-//}
 
 var Task = (props) => {
   const { connectDropTarget, connectDragSource, isDragging } = props;
@@ -57,16 +55,20 @@ var Task = (props) => {
   let renderTask = (props) => {
     return (
       <div className={taskClassName}>
-        <div>
+        <div className="done-button-container">
           <button type="button"
                   className={doneButtonClassName}
                   onClick={(event) => Meteor.call('tasks.setChecked', props.task._id, !props.task.checked)}>
           </button>
         </div>
 
-        <div>
+        <div className="main-container">
           <div className="text"> {props.task.text} </div>
           <div className="username"> {props.task.username} </div>
+        </div>
+
+        <div className="secondary-container">
+          <DueDate task={props.task} />
         </div>
 
         <div className="more pt-align-right" onClick={(event) => props.selectTask(props.task._id)}>
