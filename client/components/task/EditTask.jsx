@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import classnames from 'classnames';
+import { renderDatePicker } from './helpers/duedatePickerHelper';
 
 var EditTask = (props) => {
   const taskClassName = classnames({
@@ -18,18 +19,22 @@ var EditTask = (props) => {
                type="text"
                autoComplete={"off"}
                component="input"
-               className="edit-input"
+               className="edit-input pt-input"
                value={props.task.text}/>
 
-         <button type="submit"
-                 className="edit-form-save-button pt-button pt-intent-primary">
-           Submit
-         </button>
-         <button type="button"
+        <Field name="dueDate"
+               component={renderDatePicker}
+               currentValue={props.task.dueDate}/>
+
+        <button type="submit"
+                className="edit-form-save-button pt-button pt-intent-primary">
+          Submit
+        </button>
+        <button type="button"
                  className="edit-form-cancel-button pt-button pt-intent-danger"
                  onClick={(event) => props.cancelEditTask(props.task._id)}>
            Cancel
-         </button>
+        </button>
       </form>
     </div>
   );
