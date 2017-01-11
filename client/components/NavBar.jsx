@@ -23,28 +23,31 @@ const NavBar = (props) => {
 
   return (
     <nav className="navbar pt-navbar">
-      <div className="pt-navbar-group pt-align-left">
-        <div className="pt-navbar-heading">
-          <span className="title">Tasks</span>
+      <div className="navbar-container">
+        <div className="pt-navbar-group pt-align-left">
+          <div className="pt-navbar-heading">
+            <span className="title">Tasks</span>
+          </div>
+          <form className="search">
+            <Field name="searchTerm"
+                   type="text"
+                   autoComplete={"off"}
+                   component="input"
+                   className="pt-input search-input"
+                   placeholder="Search tasks"/>
+          </form>
         </div>
-        <form className="search">
-          <Field name="searchTerm"
-                 type="text"
-                 autoComplete={"off"}
-                 component="input"
-                 className="pt-input search-input"
-                 placeholder="Search tasks"/>
-        </form>
-      </div>
-      <div className="pt-navbar-group pt-align-right">
-        <Popover content={popoverContent}
-                 interactionKind={PopoverInteractionKind.CLICK}
-                 position={Position.BOTTOM_RIGHT}
-                 useSmartPositioning={true}>
-          <a className={'pt-button pt-minimal'}>
-            <span className={'pt-icon-standard pt-icon-cog pt-icon-large'}></span>
-          </a>
-        </Popover>
+        
+        <div className="pt-navbar-group pt-align-right">
+          <Popover content={popoverContent}
+                   interactionKind={PopoverInteractionKind.CLICK}
+                   position={Position.BOTTOM_RIGHT}
+                   useSmartPositioning={true}>
+            <a className={'pt-button pt-minimal'}>
+              <span className={'pt-icon-standard pt-icon-cog pt-icon-large'}></span>
+            </a>
+          </Popover>
+        </div>
       </div>
     </nav>
   );

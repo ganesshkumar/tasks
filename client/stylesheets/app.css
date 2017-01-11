@@ -46,8 +46,13 @@ body {
  * Css for NavBar.jsx
  */
 
+.navbar-container {
+  width: 60%;
+  margin: auto;
+}
+
 .app-container {
-  margin: 20px;
+  margin: 20px auto;
   width: 50%;
 }
 
