@@ -15,6 +15,7 @@ import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import NavBar from '../components/NavBar'
 import TaskPanel from './TaskPanel';
+import ControlPanel from '../components/controlpanel/ControlPanel';
 import AuthForm from '../components/auth/AuthForm';
 
 class App extends Component {
@@ -44,8 +45,14 @@ class App extends Component {
             <NavBar handleLogout={this.props.handleLogout} />
           </header>
 
-          <div className="app-container">
-            <TaskPanel />
+          <div className='app-container'>
+            <div className='control-panel-container'>
+              <ControlPanel />
+            </div>
+
+            <div className='tasks-container'>
+              <TaskPanel />
+            </div>
           </div>
 
         </div>

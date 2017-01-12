@@ -1,0 +1,21 @@
+.control-panel-container {
+  width: 20%;
+  margin: 10px;
+}
+
+.new-project-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-project-form .project-name-input {
+  width: 80%;
+}
+
+.new-project-form .save-button {
+  margin: 5px 5px 0 0;
+}
+
+.new-project-form .cancel-button {
+  margin: 5px 0 0 5px;
+}
