@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Task from '../task/Task';
 
 import {
-  editTask, cancelEditTask, selectTask, deselectTask, reorderTodos
+  editTask, cancelEditTask, selectTask, deselectTask, reorderTasksOrder
 } from '../../actions/taskActions';
 
 const TaskList = (props) => (
@@ -11,13 +11,14 @@ const TaskList = (props) => (
     {props.filteredTasks.map((task, i) => {
       return <Task key={task._id}
                    index={i} task={task}
+                   projectId={props.projectId}
                    moveTask={props.moveTask}
                    canMoveTask={props.canMoveTask}
                    editTask={props.editTask}
                    cancelEditTask={props.cancelEditTask}
                    selectTask={props.selectTask}
                    deselectTask={props.deselectTask}
-                   reorderTodos={props.reorderTodos}
+                   reorderTasksOrder={props.reorderTasksOrder}
              />
     })}
   </div>
@@ -42,27 +43,29 @@ const mapStateToProps = state => {
       return tasks;
     })(state),
 
+    projectId: state.projects.selectedProject,
+
     canMoveTask: (dragIndex, hoverIndex) => {
-      const dragTodo = state.todos[dragIndex];
-      const hoverTodo = state.todos[hoverIndex];
+      const dragTask = state.tasks.items[state.projects.items[state.projects.selectedProject].tasksOrder[dragIndex]];
+      const hoverTask =  state.tasks.items[state.projects.items[state.projects.selectedProject].tasksOrder[hoverIndex]];
 
       // Return true only if both the todos are not completed
-      return (!('checked' in dragTodo && dragTodo.checked) &&
-                !('checked' in hoverTodo && hoverTodo.checked))
+      return (!('checked' in dragTask && dragTask.checked) &&
+                !('checked' in hoverTask && hoverTask.checked))
     },
 
     moveTask: (dragIndex, hoverIndex) => {
-      var todos = state.todos.slice();
-      todos[dragIndex] = [todos[hoverIndex], todos[hoverIndex]=todos[dragIndex]][0];
+      var tasksOrder = state.projects.items[state.projects.selectedProject].tasksOrder;
+      tasksOrder[dragIndex] = [tasksOrder[hoverIndex], tasksOrder[hoverIndex]=tasksOrder[dragIndex]][0];
 
-      return todos;
+      return tasksOrder;
     }
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    reorderTodos: (todos) => dispatch(reorderTodos(todos)),
+    reorderTasksOrder: (projectId, tasksOrder) => dispatch(reorderTasksOrder(projectId, tasksOrder)),
     editTask: (taskId) => dispatch(editTask(taskId)),
     cancelEditTask: (taskId) => dispatch(cancelEditTask(taskId)),
     selectTask: (taskId) => dispatch(selectTask(taskId)),
@@ -72,7 +75,8 @@ const mapDispatchToProps = dispatch => {
 
 TaskList.propTypes = {
   filteredTasks: PropTypes.array.isRequired,
-  reorderTodos: PropTypes.func.isRequired,
+  reorderTasksOrder: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
   moveTask: PropTypes.func.isRequired,
   canMoveTask: PropTypes.func.isRequired,
   editTask: PropTypes.func.isRequired,

@@ -60,5 +60,19 @@ Meteor.methods({
         );
       } else {console.error(error)}
     });
+  },
+
+  'projects.reorderTasks'(projectId, tasksOrder) {
+    check(projectId, String);
+    check(tasksOrder, [String]);
+
+    if (Projects.findOne({_id: projectId}).owner !== this.userId) {
+      throw new Meteor.Error('project-not-authorized');
+    }
+
+    Projects.update(
+      { _id: projectId },
+      { $set: { tasksOrder: tasksOrder}}
+    );
   }
 });

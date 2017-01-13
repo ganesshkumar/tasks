@@ -16,12 +16,11 @@ export function updateTask(task) {
   Meteor.call('tasks.update', task);
 }
 
-export function reorderTodos(todos) {
+export function reorderTasksOrder(projectId, tasksOrder) {
   return dispatch => {
     new Promise((resolve, reject) => {
-      Meteor.call('tasks.setOrder',
-          Meteor.user()._id,
-          todos.map(todo => todo._id),
+      Meteor.call('projects.reorderTasks',
+          projectId, tasksOrder,
           (error, result) => error ? reject(error): resolve()
       );
     })
