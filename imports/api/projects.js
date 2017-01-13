@@ -9,16 +9,7 @@ if (Meteor.isServer) {
   Meteor.publish('projects', function projectsPublication() {
     return Projects.find({
       owner: this.userId
-    }).aggregate([
-      {
-        $lookup: {
-          from: 'tasks',
-          localField: 'tasksOrder',
-          foreignField: '_id',
-          as: 'tasks'
-        }
-      }
-    ]);
+    });
   });
 }
 

@@ -15,8 +15,6 @@ import CompletedFilter from '../components/taskpanel/CompletedFilter';
 import TaskList from '../components/taskpanel/TaskList';
 
 const TaskPanel = (props) => {
-
-  console.error('log', props.projectId)
   const toggleHideCompleted = (event) => {
     if (props.shouldHideCompleted) {
       props.showCompleted();
