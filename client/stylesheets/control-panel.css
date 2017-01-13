@@ -1,7 +1,30 @@
 .control-panel-container {
-  width: 20%;
-  margin: 10px;
+  width: 15%;
+  margin: 5px;
+  padding: 5px;
 }
+
+/*
+ * CSS for project
+ */
+
+.project {
+  margin: 5px 5px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+.project:hover {
+  background-color: #E1E8ED;
+}
+
+.project .name {
+  font-size: 1.1em;
+}
+
+/*
+ * CSS for project form
+ */
 
 .new-project-form {
   display: flex;

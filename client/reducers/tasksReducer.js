@@ -1,11 +1,7 @@
 export default tasksReducer = (state = [], action) => {
   switch (action.type) {
     case 'COMPUTE_ORDER_AND_SET_TODOS':
-      return computeTasksOrder(
-        action.todos,
-        pushFinishedTasksToBottom(action.todos, action.todosOrder),
-        []
-      );
+      return action.todos;
     case 'SET_TODOS':
       return action.todos.slice();
     default:

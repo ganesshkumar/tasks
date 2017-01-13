@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { reset } from 'redux-form';
 
-export function createTask(text) {
+export function createTask(text, projectId) {
   return dispatch => {
     new Promise((resolve, reject) => {
-      Meteor.call('tasks.insert', text, (error, result) =>
+      Meteor.call('projects.insertTask', text, projectId, (error, result) =>
         error ? reject(error) : resolve());
     })
     .then(() => dispatch(reset('task')))

@@ -44,7 +44,7 @@ var ProjectForm = (props) => {
 }
 
 ProjectForm.propTypes = {
-  showNewProjectForm: PropTypes.boolean.isRequired,
+  showNewProjectForm: PropTypes.bool.isRequired,
   getNewProjectForm: PropTypes.func.isRequired,
   closeNewProjectForm: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired

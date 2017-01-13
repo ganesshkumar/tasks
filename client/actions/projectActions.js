@@ -13,6 +13,13 @@ export function closeNewProjectForm() {
   }
 }
 
+export function selectProject(projectId) {
+  return {
+    type: 'SELECT_PROJECT',
+    projectId: projectId
+  }
+}
+
 export function createProject(name) {
   return dispatch => {
     new Promise((resolve, reject) => {

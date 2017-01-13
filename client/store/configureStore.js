@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import reducers from '../reducers/reducers';
 import { Tasks, TaskOrder } from '../../imports/api/tasks';
+import { Projects } from '../../imports/api/projects';
 
 const loggerMiddleware = createLogger();
 
@@ -21,10 +22,12 @@ export default (preloadedState) => {
   Tracker.autorun(() => {
     store.dispatch({
       type: 'COMPUTE_ORDER_AND_SET_TODOS',
-      todos: Tasks.find({}).fetch(),
-      todosOrder: (x =>
-        x && x.length > 0 && x[0].tasksOrder
-      )(TaskOrder.find({}).fetch())
+      todos: Tasks.find({}).fetch()
+    });
+
+    store.dispatch({
+      type: 'SYNC_PROJECTS',
+      projects: Projects.find({}).fetch()
     });
   });
 
