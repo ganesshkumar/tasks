@@ -19,7 +19,7 @@ export default tasksReducer = (state = {
   }
 };
 
-const uiTasksReducer = (state =[], action) => {
+const uiTasksReducer = (state = {}, action) => {
   switch (action.type) {
     case 'EDIT_TASK':
       return findTaskAndAddProperty(state, action.id, 'editing');
@@ -36,20 +36,16 @@ const uiTasksReducer = (state =[], action) => {
 
 // Helper functions
 
-const findTaskAndAddProperty = (tasks, taskId, label) => {
-  let currentTask = findTaskById(tasks, taskId);
+const findTaskAndAddProperty = (state, taskId, label) => {
+  let currentTask = state.items[taskId];
   setAttribute(currentTask, label);
-  return tasks.slice();
+  return Object.assign({}, state);
 }
 
-const findTaskAndRemoveProperty = (tasks, taskId, label) => {
-  currentTask = findTaskById(tasks, taskId);
+const findTaskAndRemoveProperty = (state, taskId, label) => {
+  let currentTask = state.items[taskId];
   removeAttribute(currentTask, label);
-  return tasks.slice();
-}
-
-const findTaskById = (tasks, taskId) => {
-  return tasks.find(task => task._id === taskId);
+  return Object.assign({}, state);
 }
 
 const setAttribute = (task, label) => {
@@ -60,40 +56,4 @@ const removeAttribute = (task, label) => {
   if (label in task) {
     delete(task[label]);
   }
-}
-
-// Helpers to compute the order of tasks being shown
-
-const computeTasksOrder = (todos, todosOrder, state) => {
-  if (!todos || todos.length < 1) {
-      return state;
-  }
-  const orderedTodos = [];
-  // construct a map of todo._id, todo
-  todos = todos.reduce((todosMap, todo) => {
-    todosMap[todo._id] = todo;
-    return todosMap;
-  }, {});
-  // Add todos to orderedTodos based on todosOrder
-  todosOrder.forEach(id => {
-    orderedTodos.push(todos[id]);
-    delete todos[id]
-  });
-  // Add any element whose id was not in the todosOrder
-  Object.keys(todos).forEach(_id => orderedTodos.push(todos[_id]));
-  return orderedTodos;
-}
-
-const pushFinishedTasksToBottom = (todos, todosOrder) => {
-  if (!todosOrder || todosOrder.length < 1) {
-    return todosOrder;
-  }
-  // construct a map of todo._id, todo
-  todos = todos.reduce((todosMap, todo) => {
-    todosMap[todo._id] = todo;
-    return todosMap;
-  }, {});
-
-  return todosOrder.filter(_id => !todos[_id].checked)
-    .concat(todosOrder.filter(_id => todos[_id].checked));
 }
