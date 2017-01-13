@@ -2,15 +2,15 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import authForm from './authFormReducer';
-import todoFilters from './todoFilterReducer';
+import taskFilters from './taskFilterReducer';
 import userReducer from './userReducer';
-import todoReducer from './tasksReducer';
+import tasksReducer from './tasksReducer';
 import projectFormReducer from './projectFormReducer';
 import projectsReducer from './projectsReducer';
 
 export default combineReducers({
-  todos: todoReducer,
-  todoFilters: todoFilters,
+  tasks: tasksReducer,
+  taskFilters: taskFilters,
   projects: projectsReducer,
   showNewProjectForm: projectFormReducer,
   user: userReducer,

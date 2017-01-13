@@ -5,12 +5,14 @@ import ProjectForm from './ProjectForm';
 import { selectProject } from '../../actions/projectActions';
 
 const ControlPanel = (props) => {
+  const projects = Object.keys(props.projects).map(id => props.projects[id]);
+  
   return (
     <div>
       <h5> Projects </h5>
       <div>
         {
-          props.projects.map(project => (
+          projects.map(project => (
             <div className='project'
                  key={project._id}
                  onClick={(event) => props.selectProject(project._id)}>
@@ -19,7 +21,7 @@ const ControlPanel = (props) => {
           ))
         }
         <div className='project'>
-          <ProjectForm />
+          <ProjectForm key='project-form'/>
         </div>
       </div>
     </div>

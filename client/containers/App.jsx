@@ -66,14 +66,12 @@ App.propTypes = {
   authForm: PropTypes.string.isRequired,
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
-  incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   return {
     authForm: state.authForm,
-    incompleteCount: state.todos.filter(todo => !todo.checked).length,
     currentUser: Meteor.user()
   };
 }

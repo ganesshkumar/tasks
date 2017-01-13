@@ -7,6 +7,8 @@ import reducers from '../reducers/reducers';
 import { Tasks, TaskOrder } from '../../imports/api/tasks';
 import { Projects } from '../../imports/api/projects';
 
+import ProjectConstants from '../constants/ProjectConstants';
+
 const loggerMiddleware = createLogger();
 
 export default (preloadedState) => {
@@ -20,15 +22,29 @@ export default (preloadedState) => {
   );
 
   Tracker.autorun(() => {
+    const tasks = Tasks.find({}).fetch();
+    const projects = Projects.find({}).fetch();
+
     store.dispatch({
-      type: 'COMPUTE_ORDER_AND_SET_TODOS',
-      todos: Tasks.find({}).fetch()
+      type: 'SYNC_TASKS',
+      tasks: tasks,
+      lastSyncAt: new Date()
     });
 
     store.dispatch({
       type: 'SYNC_PROJECTS',
-      projects: Projects.find({}).fetch()
+      projects: projects,
+      lastSyncAt: new Date()
     });
+
+    if (!store.projects || !store.projects.selectedProject) {
+      store.dispatch({
+        type: 'SET_DEFAULT_PROJECT',
+        projectId: projects
+            .filter(project => project.name === ProjectConstants.DEFAULT_PROJECT)
+            .map(project => (project && project._id) ? project._id : '')[0] || ''
+      });
+    }
   });
 
   return store;

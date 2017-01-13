@@ -30,7 +30,7 @@ const TaskPanel = (props) => {
 
   return (
     <div>
-      <Header incompleteCount={props.incompleteCount} />
+      <Header incompleteCount={props.filteredTasks.filter(task => !task.checked).length} />
 
       <NewTask onSubmit={handleNewTask.bind(this)} />
 
@@ -48,28 +48,20 @@ TaskPanel.propTypes = {
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
   filteredTasks: PropTypes.array.isRequired,
-  shouldHideCompleted: PropTypes.bool.isRequired,
-  incompleteCount: PropTypes.number.isRequired
+  shouldHideCompleted: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    filteredTasks: state.todoFilters.hideCompleted ?
-        state.todos.filter(task => !task.checked) : state.todos,
-    shouldHideCompleted: state.todoFilters.hideCompleted,
-    incompleteCount: state.todos.filter(todo => !todo.checked).length,
+    filteredTasks: ((state) => {
+      const project = state.projects.items[state.projects.selectedProject];
+      return (project && project.tasksOrder && project.tasksOrder
+        .map(taskId => state.tasks.items[taskId])
+        .filter(task => !task.checked)) || [];
+    })(state),
+    shouldHideCompleted: state.taskFilters.hideCompleted,
     // ProjectId to insert the task into
-    projectId: ((state) => {
-      if (state.projects.selectedProject ) {
-        return state.projects.selectedProject;
-      } else if (state.projects.items && state.projects.items.length > 0) {
-        return state.projects.items
-          .filter(project => project.name === ProjectConstants.DEFAULT_PROJECT)
-          .map(defaultProject => defaultProject ? defaultProject._id : '')[0];
-      } else {
-        return '';
-      }
-    })(state)
+    projectId: state.projects.selectedProject || ''
   };
 }
 

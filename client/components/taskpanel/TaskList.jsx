@@ -26,18 +26,20 @@ const TaskList = (props) => (
 const mapStateToProps = state => {
   return {
     filteredTasks: ((state) => {
-      var todos = state.todos;
+      var taskIds = (state.projects.selectedProject &&
+          state.projects.items[state.projects.selectedProject].tasksOrder) || [];
+      var tasks = taskIds.map(id => state.tasks.items[id])
       // Apply hide completed filter
-      if (state.todoFilters.hideCompleted) {
-        todos = todos.filter(task => !task.checked);
+      if (state.taskFilters.hideCompleted) {
+        tasks = tasks.filter(task => !task.checked);
       }
       // Apply search filter
       if (state.form.search && state.form.search.values
           && state.form.search.values.searchTerm) {
-        todos = todos.filter(
+        tasks = tasks.filter(
           task => task.text.includes(state.form.search.values.searchTerm));
       }
-      return todos;
+      return tasks;
     })(state),
 
     canMoveTask: (dragIndex, hoverIndex) => {

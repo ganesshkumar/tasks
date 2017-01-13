@@ -1,13 +1,22 @@
-export default tasksReducer = (state = [], action) => {
+export default tasksReducer = (state = {
+  items: [],
+  lastSyncAt: null
+}, action) => {
   switch (action.type) {
-    case 'COMPUTE_ORDER_AND_SET_TODOS':
-      return action.todos;
-    case 'SET_TODOS':
+    case 'SYNC_TASKS':
+      return Object.assign({}, state, {
+        items: action.tasks.reduce((map, task) => {
+          map[task._id] = task;
+          return map;
+        }, {}),
+        lastSyncAt: action.lastSyncAt
+      });
+    case 'SET_TASKS':
+      // Todo
       return action.todos.slice();
     default:
       return uiTasksReducer(state, action);
   }
-  return state;
 };
 
 const uiTasksReducer = (state =[], action) => {
