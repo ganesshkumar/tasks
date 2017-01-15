@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Field, reduxForm } from 'redux-form';
-import classnames from 'classnames';
 
 import {
   Popover,
@@ -37,7 +36,7 @@ const NavBar = (props) => {
                    placeholder="Search tasks"/>
           </form>
         </div>
-        
+
         <div className="pt-navbar-group pt-align-right">
           <Popover content={popoverContent}
                    interactionKind={PopoverInteractionKind.CLICK}
