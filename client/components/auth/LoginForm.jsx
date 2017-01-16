@@ -8,7 +8,7 @@ import { Meteor } from 'meteor/meteor';
 
 import {
   validate, warn, renderName, renderPassword
-} from '../../helpers/authHelpers';
+} from './helpers/authHelpers';
 
 const LoginForm = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props;

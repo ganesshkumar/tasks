@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from "meteor/accounts-base";
-
+import { Accounts } from 'meteor/accounts-base';
+import ProjectConstants from '../constants/ProjectConstants';
 // Action and helpers for signup
 
 function signupRequest(username, password) {
@@ -36,6 +36,7 @@ export function signup(username, password) {
         password
       }, (error) => error ? reject(error) : resolve());
     })
+    .then(() => Meteor.call('projects.create', ProjectConstants.DEFAULT_PROJECT))
     .then(() => dispatch(signupSuccess(Meteor.user())))
     .catch(error => dispatch(signupFailure(username, error)));
   }

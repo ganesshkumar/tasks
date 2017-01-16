@@ -12,4 +12,5 @@ ratings:
   - imports/**
 exclude_paths:
 - client/stylesheets/blueprint.css
+- client/stylesheets/blueprint-datetime.css
 - node_modules/**/*

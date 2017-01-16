@@ -22,35 +22,6 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'tasks.insert'(text) {
-    check(text, String);
-
-    const userId = this.userId;
-    if (!userId) {
-      throw new Meteor.Error('not-authorized');
-    }
-
-    Tasks.insert({
-      text,
-      createdAt: new Date(),
-      owner: this.userId,
-      checked: false,
-      username: Meteor.users.findOne(userId).username
-    }, (error, result) => {
-      if (!error) {
-        const taskOrder = TaskOrder.findOne({_id: userId});
-        if (!taskOrder) {
-          TaskOrder.insert({_id: userId, tasksOrder: [result]});
-        } else {
-          TaskOrder.update(
-            { _id: userId },
-            { $push: { tasksOrder: { $each: [result], $position: 0 }}}
-          );
-        }
-      } else {console.error(error)}
-    });
-  },
-
   'tasks.update'(task) {
     // Todo: Add check here
     if (task.owner !== this.userId) {

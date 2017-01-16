@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import classnames from 'classnames';
 
+import ProjectConstants from '../constants/ProjectConstants';
 import { hideCompleted, showCompleted } from '../actions/filterActions';
 import { createTask } from '../actions/taskActions';
 
@@ -14,7 +15,6 @@ import CompletedFilter from '../components/taskpanel/CompletedFilter';
 import TaskList from '../components/taskpanel/TaskList';
 
 const TaskPanel = (props) => {
-
   const toggleHideCompleted = (event) => {
     if (props.shouldHideCompleted) {
       props.showCompleted();
@@ -25,14 +25,14 @@ const TaskPanel = (props) => {
 
   const handleNewTask = (values) => {
     event.preventDefault();
-    props.createTask(values.task);
+    props.createTask(values.task, props.projectId);
   }
 
   return (
     <div>
-      <Header incompleteCount={props.incompleteCount} />
+      <Header incompleteCount={props.filteredTasks.filter(task => !task.checked).length} />
 
-      <NewTask onSubmit={handleNewTask}/>
+      <NewTask onSubmit={handleNewTask.bind(this)} />
 
       <CompletedFilter shouldHideCompleted={props.shouldHideCompleted}
                        toggleHideCompleted={toggleHideCompleted} />
@@ -43,26 +43,31 @@ const TaskPanel = (props) => {
 }
 
 TaskPanel.propTypes = {
+  projectId: PropTypes.string.isRequired,
   createTask: PropTypes.func.isRequired,
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
   filteredTasks: PropTypes.array.isRequired,
-  shouldHideCompleted: PropTypes.bool.isRequired,
-  incompleteCount: PropTypes.number.isRequired
+  shouldHideCompleted: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    filteredTasks: state.todoFilters.hideCompleted ?
-        state.todos.filter(task => !task.checked) : state.todos,
-    shouldHideCompleted: state.todoFilters.hideCompleted,
-    incompleteCount: state.todos.filter(todo => !todo.checked).length,
+    filteredTasks: ((state) => {
+      const project = state.projects.items[state.projects.selectedProject];
+      return (project && project.tasksOrder && project.tasksOrder
+        .map(taskId => state.tasks.items[taskId])
+        .filter(task => !task.checked)) || [];
+    })(state),
+    shouldHideCompleted: state.taskFilters.hideCompleted,
+    // ProjectId to insert the task into
+    projectId: state.projects.selectedProject || ''
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createTask: (text) => dispatch(createTask(text)),
+    createTask: (text, projectId) => dispatch(createTask(text, projectId)),
     hideCompleted: () => dispatch(hideCompleted()),
     showCompleted: () => dispatch(showCompleted())
   };

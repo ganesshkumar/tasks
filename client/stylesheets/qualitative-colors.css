@@ -1,0 +1,87 @@
+/*
+ * Qualitative colors as obtained from http://blueprintjs.com/docs/#colors
+ * ["#2965CC", "#29A634", "#D99E0B", "#D13913", "#8F398F", "#00B3A4", "#DB2C6F", "#9BBF30", "#96622D", "#7157D9"]
+ */
+.cobalt {
+  color: #2965CC;
+}
+
+.bg-cobalt {
+  background-color: #2965CC;
+}
+
+.forest {
+  color: #29A634;
+}
+
+.bg-forest {
+  background-color: #29A634;
+}
+
+.gold {
+  color: #D99E0B;
+}
+
+.bg-gold {
+  background-color: #D99E0B;
+}
+
+.vermilion {
+  color: #D13913;
+}
+
+.bg-vermilion {
+  background-color: #D13913;
+}
+
+.violet {
+  color: #8F398F;
+}
+
+.bg-violet {
+  background-color: #8F398F;
+}
+
+.turquoise {
+  color: #00B3A4;
+}
+
+.bg-turquoise {
+  background-color: #00B3A4;
+}
+
+
+.rose {
+  color: #DB2C6F;
+}
+
+.bg-rose {
+  background-color: #DB2C6F;
+}
+
+
+.lime {
+  color: #9BBF30;
+}
+
+.bg-lime {
+  background-color: #9BBF30;
+}
+
+
+.sepia {
+  color: #96622D;
+}
+
+.bg-sepia {
+  background-color: #96622D;
+}
+
+
+.indigo {
+  color: #7157D9;
+}
+
+.bg-indigo {
+  background-color: #7157D9;
+}

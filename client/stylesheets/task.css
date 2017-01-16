@@ -1,0 +1,149 @@
+.tasks-container {
+  margin: 10px;
+  width: 35%;
+}
+
+/**
+ * Css for Task.jsx
+ */
+.task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 0.5px #E1E8ED solid;
+}
+
+.task.editing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 0.5px #E1E8ED solid;
+}
+
+.task.selected {
+  background-color: #E1E8ED;
+}
+
+.task.hidden {
+    opacity: 0;
+}
+
+.task .done-button-container {
+  #max-width: 30px;
+}
+
+.task .done-button {
+  border-radius: 50%;
+  margin: 0 10px;
+  min-height: 30px;
+  #min-width: 30px;
+}
+
+.task .main-container {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.task.done .text {
+  color: #8A9BA8;
+  text-decoration: line-through;
+}
+
+.task .username {
+  color: #8A9BA8;
+  font-size: 0.9em;
+}
+
+.task .secondary-container {
+  margin-right: 20px;
+}
+
+.task:hover .secondary-container {
+  margin-right: 10px;
+}
+
+.task .due-date {
+  font-size: 0.9em;
+}
+
+.task .due-date .done {
+  color: #8F398F;
+}
+
+.task .due-date .over-due {
+  color: #D13913;
+}
+
+.task .due-date .today {
+  color: #D99E0B;
+}
+
+.task .due-date .this-week {
+  color: #2965CC;
+}
+
+.task .due-date .someday {
+  color: #29A634;
+}
+
+.task .more {
+  display: none;
+}
+
+.task:hover .more {
+  display: flex;
+  width: 10px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.task .editform {
+  width: 100%;
+}
+
+/*
+ * Css for edit form of task
+ */
+
+.task .editform .edit-input {
+  width: 100%;
+  font-size: 1em;
+}
+
+.task .editform .edit-input:focus {
+  outline: none;
+}
+
+.task .edit-form-save-button {
+  margin: 5px 5px 0 0;
+}
+
+.task .edit-form-cancel-button {
+  margin: 5px 0 0 5px;
+}
+
+.duedate-picker .duedate-button-group {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-top: 5px;
+}
+
+.duedate-picker .duedate-button-group a {
+  flex: 1;
+}
+
+
+/**
+ * Css for task filters
+ */
+
+.pt-control.pt-switch .no-outline {
+  outline: none;
+}

@@ -124,7 +124,7 @@ Task.propTypes = {
   isDragging: PropTypes.bool.isRequired,
   moveTask: PropTypes.func.isRequired,
   canMoveTask: PropTypes.func.isRequired,
-  reorderTodos: PropTypes.func.isRequired,
+  reorderTasksOrder: PropTypes.func.isRequired,
   editTask: PropTypes.func.isRequired,
   cancelEditTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,

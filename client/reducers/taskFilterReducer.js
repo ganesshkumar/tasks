@@ -1,4 +1,4 @@
-const todoFilters = (state = {
+const taskFilters = (state = {
   hideCompleted: false
 }, action) => {
     switch (action.type) {
@@ -15,4 +15,4 @@ const todoFilters = (state = {
     }
 }
 
-export default todoFilters;
+export default taskFilters;

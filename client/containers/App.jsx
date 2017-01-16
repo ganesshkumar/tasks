@@ -15,6 +15,7 @@ import { EditableText} from "@blueprintjs/core";
 import SubscribeComponent from '../helpers/SubscriberComponent';
 import NavBar from '../components/NavBar'
 import TaskPanel from './TaskPanel';
+import ControlPanel from '../components/controlpanel/ControlPanel';
 import AuthForm from '../components/auth/AuthForm';
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
 
   componentWillMount() {
     this.props.subscribe('tasks');
-    this.props.subscribe('taskOrder');
+    this.props.subscribe('projects');
   }
 
   render() {
@@ -44,8 +45,14 @@ class App extends Component {
             <NavBar handleLogout={this.props.handleLogout} />
           </header>
 
-          <div className="app-container">
-            <TaskPanel />
+          <div className='app-container'>
+            <div className='control-panel-container'>
+              <ControlPanel />
+            </div>
+
+            <div className='tasks-container'>
+              <TaskPanel />
+            </div>
           </div>
 
         </div>
@@ -59,14 +66,12 @@ App.propTypes = {
   authForm: PropTypes.string.isRequired,
   hideCompleted: PropTypes.func.isRequired,
   showCompleted: PropTypes.func.isRequired,
-  incompleteCount: PropTypes.number.isRequired,
   currentUser: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   return {
     authForm: state.authForm,
-    incompleteCount: state.todos.filter(todo => !todo.checked).length,
     currentUser: Meteor.user()
   };
 }

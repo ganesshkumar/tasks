@@ -44,8 +44,8 @@ export const taskTarget = {
 
     // Time to actually perform the action
     if (props.canMoveTask(dragIndex, hoverIndex)) {
-      const reorderedTodos = props.moveTask(dragIndex, hoverIndex);
-      props.reorderTodos(reorderedTodos);      
+      const reorderedTasksOrder = props.moveTask(dragIndex, hoverIndex);
+      props.reorderTasksOrder(props.projectId, reorderedTasksOrder);
     }
 
     // Note: we're mutating the monitor item here!
