@@ -56,8 +56,8 @@ const mapStateToProps = state => {
     filteredTasks: ((state) => {
       const project = state.projects.items[state.projects.selectedProject];
       return (project && project.tasksOrder && project.tasksOrder
-        .map(taskId => state.tasks.items[taskId])
-        .filter(task => !task.checked)) || [];
+        .map(taskId => taskId in state.tasks.items && state.tasks.items[taskId])
+        .filter(task => task && !task.checked)) || [];
     })(state),
     shouldHideCompleted: state.taskFilters.hideCompleted,
     // ProjectId to insert the task into

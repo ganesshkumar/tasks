@@ -45,7 +45,7 @@ var Task = (props) => {
             Edit Task
           </a>
           <a className="pt-menu-item pt-icon-delete pt-intent-danger"
-             onClick={(event) => Meteor.call('tasks.remove', props.task._id)}>
+             onClick={(event) => Meteor.call('projects.removeTask', props.task.project, props.task._id)}>
             Delete Task
           </a>
         </li>

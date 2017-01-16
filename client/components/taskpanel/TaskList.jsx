@@ -30,6 +30,8 @@ const mapStateToProps = state => {
       var taskIds = (state.projects.selectedProject &&
           state.projects.items[state.projects.selectedProject].tasksOrder) || [];
       var tasks = taskIds.map(id => state.tasks.items[id])
+                         .filter(task => task !== undefined)
+
       // Apply hide completed filter
       if (state.taskFilters.hideCompleted) {
         tasks = tasks.filter(task => !task.checked);

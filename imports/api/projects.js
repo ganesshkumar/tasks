@@ -74,5 +74,22 @@ Meteor.methods({
       { _id: projectId },
       { $set: { tasksOrder: tasksOrder}}
     );
-  }
+  },
+
+  'projects.removeTask'(projectId, taskId) {
+    check(projectId, String);
+    check(taskId, String);
+
+    const userId = this.userId;
+    const task = Tasks.findOne(taskId);
+    if (task.owner !== userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Tasks.remove(taskId, (error, result) => {
+      if (!error) {
+        Projects.update({ _id: projectId}, { $pull: { tasksOrder: taskId }});
+      }
+    });
+  },
 });
