@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo:3.4.0
+    ports:
+      - "27030:27017"
+    volumes:
+      - $HOME/Data/mongodb:/data/db
+    command: mongod --smallfiles
+
+  web:
+    image: ganesshkumar/tasks
+    ports:
+      - "8001:80"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/tasks
+      - ROOT_URL=http://docker.local
